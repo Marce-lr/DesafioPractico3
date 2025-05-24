@@ -12,7 +12,7 @@ if (process.env.NODE_ENV == "production") {
 } else {
   dbConfig = {
     HOST: process.env.DB_HOST || "localhost",
-    USER: process.env.DD_USER || "root",
+    USER: process.env.DB_USER || "root",
     PASSWORD: process.env.DB_PASSWORD || "",
     DB: process.env.DB_NAME || "librosdb",
     PORT: process.env.DB_PORT || 3006,

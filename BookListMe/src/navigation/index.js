@@ -3,8 +3,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
-import BookListScreen from "../screens/BookListScreen";
 import { AuthContext } from "../contexts/Authcontext";
+import AuthenticatedTabs from "./AuthenticatedTabs";
 
 const Stack = createStackNavigator();
 
@@ -13,30 +13,16 @@ export default function Navigation() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         {userToken == null ? (
-          // Si no hay token, mostrar login y registro
           <>
-            <Stack.Screen
-              name="Login"
-              component={LoginScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Register"
-              component={RegisterScreen}
-              options={{ headerShown: false }}
-            />
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
           </>
         ) : (
-          // Si está autenticado, mostrar la lista de libros
-          <Stack.Screen
-            name="BookList"
-            component={BookListScreen}
-            options={{ title: "Mis Libros" }}
-          />
+          <Stack.Screen name="Home" component={AuthenticatedTabs} />
         )}
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  );
 }
